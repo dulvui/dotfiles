@@ -68,7 +68,7 @@ apt install -y hstr
 apt install -y podman podman-compose podman-toolbox
 
 # sway
-apt install -y  sway waybar kanshi swayidle swaylock light wlsunset wofi waybar
+apt install -y sway waybar kanshi swayidle swaylock light wlsunset wofi waybar
 apt install -y xwayland xserver-xorg-video-intel
 apt install -y network-manager
 # apt install -y fonts-font-awesome

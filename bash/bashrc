@@ -1,4 +1,4 @@
-# load custom bash aliasesA`
+# load custom bash aliases
 if [ -f $config_path/bash/bash_aliases ]; then
     . $config_path/bash/bash_aliases
 fi
