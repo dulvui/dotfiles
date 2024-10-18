@@ -1,0 +1,60 @@
+# basic
+alias ll="ls -la"
+alias vim="nvim"
+alias v="nvim"
+alias t="tmux"
+
+alias rm="trash"
+
+# git
+alias gcp="git checkout prod"
+alias gcm="git checkout main"
+alias gmm="git merge main"
+alias gmp="git merge prod"
+alias grm="git rebase main"
+alias grp="git rebase prod"
+alias g="git status"
+alias gcl="git clone"
+alias gco="git checkout"
+alias gc="git commit"
+alias gl="git log"
+alias ga="git add"
+
+# godot
+alias godot="(cd ~/dev/godot/versions; ./$(ls ~/dev/godot/versions | grep v4 | tail -1) &> /dev/null &)"
+alias godot3="(cd ~/dev/godot/versions; ./$(ls ~/dev/godot/versions | grep v3 | tail -1) &> /dev/null &)"
+
+# notes
+alias notes="cd ~/sync/shared/notes"
+alias notes-futsal="cd ~/sync/shared/notes/dev/games/futsal"
+
+#config
+alias config="cd $config_path"
+
+
+#############
+# FUNCTIONS #
+#############
+
+
+# alias gpa="git push origin && git push codeberg"
+gp() {
+    git push
+    if git remote -v | grep -q codeberg; then
+        git push codeberg
+    fi
+}
+
+# replace a git tag and delete old tag on remote
+grt() {
+    if [ -n "$1" ]; then
+        TAG="$1"
+    else
+        TAG=$(git tag | tac | head -n 1)
+    fi 
+    git tag -d "$TAG"
+    git push origin :refs/tags/"$TAG"
+    git tag "$TAG"
+    git push --tags
+}
+

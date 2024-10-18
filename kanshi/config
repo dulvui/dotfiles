@@ -1,0 +1,27 @@
+profile laptop {
+	output eDP-1 enable mode 1920x1080 position 0,0
+}
+
+profile tv {
+    output eDP-1 disable
+    output "Unknown UMC SHARP 0x00000000" mode 1920x1080 position 0,0
+}
+
+
+profile home-hp-samsung {
+    output eDP-1 disable
+    output "Unknown HP V22e CN415031XW" mode 1920x1080 position 0,0
+    output "Samsung Electric Company S22C300 H4MD802322" mode 1920x1080 position 1920,0
+    
+    exec swaymsg workspace 1, move workspace to output '"Unknown HP V22e CN415031XW"'
+    exec swaymsg workspace 9, move workspace to output '"Unknown HP V22e CN415031XW"'
+    exec swaymsg workspace 10, move workspace to output '"Unknown HP V22e CN415031XW"'
+    
+    exec swaymsg workspace 8, move workspace to output '"Samsung Electric Company S22C300 H4MD802322"'
+}
+
+profile home-hp {
+    output eDP-1 disable
+    output "Unknown HP V22e CN415031XW" mode 1920x1080 position 0,0
+}
+

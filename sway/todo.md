@@ -1,0 +1,3 @@
+- swaybar color change
+    - on capslock
+    - on low battery

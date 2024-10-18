@@ -1,0 +1,15 @@
+
+################################
+# START custom profile
+# so .profile remains local
+################################
+export config_path=~/sync/computer/config
+
+if [ -f $config_path/profile/profile ]; then
+    . $config_path/profile/profile
+fi
+################################
+# END
+################################
+
+

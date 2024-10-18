@@ -1,0 +1,6 @@
+# Orange swaybar on 15% or lower
+# SUBSYSTEM=="power_supply", ATTR{status}=="Charging", ATTR{capacity}=="[0-9][0-9]", RUN+="/bin/su dulvui -c '/usr/bin/swaymsg bar bar-0 colors background \"#FFC300\"'"
+# Orange swaybar on 15% or lower
+# SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-9][0-9]", RUN+="swaymsg -s /run/user/1000/sway-ipc.1000.1580.sock bar bar-0 colors background '#FFC300'"
+# Suspend the system on 5% or lower
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-5]", RUN+="/usr/bin/systemctl suspend"

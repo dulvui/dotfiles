@@ -1,0 +1,4 @@
+default-timeout=6000
+
+[mode=silence]
+invisible=1

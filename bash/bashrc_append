@@ -1,0 +1,15 @@
+
+################################
+# START custom bashrc
+# so .bashrc remains local
+################################
+export config_path=~/sync/computer/config
+
+if [ -f $config_path/bash/bashrc ]; then
+    . $config_path/bash/bashrc
+fi
+################################
+# END
+################################
+
+
