@@ -54,6 +54,9 @@ vim.cmd('set nowrap')
 vim.cmd('set number')
 vim.cmd('set relativenumber')
 
+-- always show warning/error line
+vim.cmd('set signcolumn=yes:1')
+
 -- cursorline
 vim.cmd('set cursorline')
 
