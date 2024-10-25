@@ -2,4 +2,4 @@
 
 mkdir -p ~/.config/godot/
 
-ln ~/.config/godot/*.tres $config_path/godot/
+ln $config_path/godot/*.tres ~/.config/godot/
