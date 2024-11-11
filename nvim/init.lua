@@ -23,7 +23,7 @@ Plug('preservim/nerdtree', { ['on'] = 'NERDTreeToggle' })
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
 Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.6' } )
+Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.8' } )
 
 Plug('stevearc/oil.nvim')
 
@@ -31,7 +31,6 @@ Plug('lukas-reineke/indent-blankline.nvim')
 -- lsp and daps
 Plug('neovim/nvim-lspconfig')
 Plug('mfussenegger/nvim-dap')
-Plug('williamboman/mason.nvim')
 
 vim.call('plug#end')
 
@@ -123,11 +122,6 @@ require'nvim-treesitter.configs'.setup {
         end
     end,
 }
-
--- ----------------------
--- mason
--- ----------------------
-require("mason").setup()
 
 -- ----------------------
 -- lsp
