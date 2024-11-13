@@ -5,7 +5,7 @@
 
 echo "setting perimssions for light and systemctl..."
 
-echo "# light shutdown, suspend, reboot" >> /etc/sudoers
+echo "# for light and systemctl shutdown, suspend, reboot" >> /etc/sudoers
 echo "%dulvui ALL=(root) NOPASSWD: /usr/bin/light,/usr/bin/systemctl" >> /etc/sudoers
 
 echo "setting perimssions for light and systemctl done."
