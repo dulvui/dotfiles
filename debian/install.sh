@@ -80,7 +80,8 @@ apt install -y mako-notifier
 apt install -y desktop-base
 # browser screenshare - https://www.reddit.com/r/swaywm/comments/l4e55v/guide_how_to_screenshare_from_chromiumfirefox/
 apt install -y xdg-desktop-portal
-apt install -y xdg-desktop-portal-wlr
+# to be verified on next install
+# apt install -y xdg-desktop-portal-wlr
 apt install -y libpipewire02
 
 # pipx
