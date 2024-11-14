@@ -23,5 +23,8 @@ profile home-hp-samsung {
 profile home-hp {
     output eDP-1 disable
     output "Unknown HP V22e CN415031XW" mode 1920x1080 position 0,0
+    exec swaymsg workspace 1, move workspace to output '"Unknown HP V22e CN415031XW"'
+    exec swaymsg workspace 9, move workspace to output '"Unknown HP V22e CN415031XW"'
+    exec swaymsg workspace 10, move workspace to output '"Unknown HP V22e CN415031XW"'
 }
 
