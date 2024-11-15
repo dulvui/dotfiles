@@ -83,6 +83,13 @@ vim.keymap.set('n', '<C-n>', ':NERDTree<CR>')
 vim.keymap.set('n', '<C-t>', ':NERDTreeToggle<CR>')
 vim.keymap.set('n', '<C-f>', ':NERDTreeFind<CR>')
 
+
+-- open NERDTree when opening a directory, not a single file
+vim.api.nvim_create_autocmd({"VimEnter"}, {
+  pattern = {"*"},
+  command = "NERDTree | wincmd p",
+})
+
 -- ----------------------
 -- oil
 -- ----------------------
