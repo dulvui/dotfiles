@@ -18,7 +18,7 @@ Plug('shaunsingh/solarized.nvim')
 
 Plug('tpope/vim-sensible')
 
-Plug('preservim/nerdtree', { ['on'] = 'NERDTreeToggle' })
+Plug('preservim/nerdtree')
 
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
