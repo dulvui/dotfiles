@@ -32,6 +32,9 @@ Plug('lukas-reineke/indent-blankline.nvim')
 Plug('neovim/nvim-lspconfig')
 Plug('mfussenegger/nvim-dap')
 
+
+Plug('tpope/vim-fugitive')
+
 vim.call('plug#end')
 
 -- ----------------------
