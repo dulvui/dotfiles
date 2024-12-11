@@ -17,6 +17,7 @@ vim.call('plug#begin')
 Plug('shaunsingh/solarized.nvim')
 
 Plug('tpope/vim-sensible')
+Plug('tpope/vim-fugitive')
 
 Plug('preservim/nerdtree')
 
@@ -28,12 +29,10 @@ Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.8' } )
 Plug('stevearc/oil.nvim')
 
 Plug('lukas-reineke/indent-blankline.nvim')
--- lsp and daps
+-- lsp
 Plug('neovim/nvim-lspconfig')
+-- daps
 Plug('mfussenegger/nvim-dap')
-
-
-Plug('tpope/vim-fugitive')
 
 vim.call('plug#end')
 
@@ -162,10 +161,10 @@ end
 -- ----------------------
 local dap = require('dap')
 -- default remaps from help dap-mappings
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<F12>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+vim.keymap.set('n', '<F9>', function() require('dap').step_out() end)
 vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
 vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
 vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
@@ -173,18 +172,18 @@ vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
 vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
 
 dap.adapters.godot = {
-  type = "server",
+  type = 'server',
   host = '127.0.0.1',
   port = 6006,
 }
 
 dap.configurations.gdscript = {
   {
-    type = "godot",
-    request = "launch",
-    name = "Launch scene",
-    project = "${workspaceFolder}",
-  }
+    type = 'godot',
+    request = 'launch',
+    name = 'Launch scene',
+    program = '${workspaceFolder}',
+  },
 }
 
 dap.configurations.gdresource = {
