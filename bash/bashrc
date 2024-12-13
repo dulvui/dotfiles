@@ -20,6 +20,9 @@ unset color_prompt force_color_promp
 
 # history
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=-1
+HISTFILESIZE=-1
+HISTIGNORE="(ls|cd|pwd|exit)*"
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 export HISTIGNORE="(ls|cd|pwd|exit)*"
