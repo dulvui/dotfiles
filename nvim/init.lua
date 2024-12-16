@@ -34,6 +34,8 @@ Plug('neovim/nvim-lspconfig')
 -- daps
 Plug('mfussenegger/nvim-dap')
 
+Plug('norcalli/nvim-colorizer.lua')
+
 vim.call('plug#end')
 
 -- ----------------------
@@ -224,3 +226,5 @@ end)
 
 require("ibl").setup { indent = { highlight = highlight } }
 
+-- colorizer
+require("colorizer").setup()
