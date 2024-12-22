@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $config_path
+
 # used for files or directories, that don't work with soft links
 # like godot's config
 
