@@ -38,6 +38,10 @@ alias config="cd $config_path"
 
 
 gp() {
+    if git remote -v | grep origin | grep -q github; then
+        make-codeberg-origin
+    fi
+
     git push
     if git remote -v | grep -q github; then
         git push github
