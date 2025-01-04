@@ -37,12 +37,17 @@ alias config="cd $config_path"
 #############
 
 
-# alias gpa="git push origin && git push codeberg"
 gp() {
     git push
-    if git remote -v | grep -q codeberg; then
-        git push codeberg
+    if git remote -v | grep -q github; then
+        git push github
     fi
+}
+
+make-codeberg-origin() {
+    echo "making codeberg new origin..."
+    git remote rename origin github
+    git remote rename codeberg origin
 }
 
 # replace a git tag and delete old tag on remote
