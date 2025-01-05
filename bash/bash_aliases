@@ -52,6 +52,8 @@ make-codeberg-origin() {
     echo "making codeberg new origin..."
     git remote rename origin github
     git remote rename codeberg origin
+    git push -u origin main
+    echo "making codeberg new origin done."
 }
 
 # replace a git tag and delete old tag on remote
