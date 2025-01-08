@@ -51,7 +51,7 @@ apt install -y foot foot-themes
 apt install -y wl-clipboard
 apt install -y fd-find
 apt install -y tmux
-apt install -y sudo
+apt install -y pandoc
 
 # dev
 apt install -y openjdk-17-jdk
