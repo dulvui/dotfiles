@@ -23,9 +23,6 @@ Plug('preservim/nerdtree')
 
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
-Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.8' } )
-
 Plug('stevearc/oil.nvim')
 
 Plug('lukas-reineke/indent-blankline.nvim')
@@ -44,6 +41,8 @@ vim.call('plug#end')
 vim.cmd('colorscheme solarized')
 vim.cmd('set background=light')
 vim.cmd('set nowrap')
+
+vim.cmd('set path+=**')
 
 -- line numbers
 vim.cmd('set number')
@@ -108,20 +107,8 @@ require("oil").setup({
 vim.keymap.set('n', '<leader>o', ':Oil<CR>')
 
 -- ----------------------
--- telescope
--- ----------------------
-local builtin = require('telescope.builtin')
--- default
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
--- custom
-vim.keymap.set('n', '<leader>fr', builtin.resume, {})
-
--- ----------------------
 -- treesitter
--- ----------------------
+-- -- ----------------------
 require'nvim-treesitter.configs'.setup {
     ensure_installed = {'gdscript', 'godot_resource', 'gdshader', 'java', 'lua', 'bash', 'xml', 'yaml', 'json', 'go', 'vimdoc'},
     highlight = {
