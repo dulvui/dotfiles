@@ -86,6 +86,9 @@ apt install -y libpipewire02
 # pipx
 apt install -y pipx
 
+# screen record as gif
+apt install -y peek
+
 #####################################################
 # remove packages
 #####################################################
