@@ -75,15 +75,22 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 
 -- write breakpoint to new line
 vim.api.nvim_create_user_command('GodotBreakpoint', function()
-    vim.cmd('normal! obreakpoint')
+    vim.cmd('normal! obreakpoint' )
+    vim.cmd('write' )
 end, {})
 vim.keymap.set('n', '<leader>b', ':GodotBreakpoint<CR>')
 
 -- delete all breakpoints in current file
-vim.api.nvim_create_user_command('GodotRemoveBreakpointsInFile', function()
+vim.api.nvim_create_user_command('GodotDeleteBreakpoints', function()
     vim.cmd('g/breakpoint/d')
 end, {})
-vim.keymap.set('n', '<leader>B', ':GodotRemoveBreakpointsInFile<CR>')
+vim.keymap.set('n', '<leader>BD', ':GodotDeleteBreakpoints<CR>')
+
+-- search all breakpoints in project
+vim.api.nvim_create_user_command('GodotFindBreakpoints', function()
+    vim.cmd(':grep breakpoint | copen')
+end, {})
+vim.keymap.set('n', '<leader>BF', ':GodotFindBreakpoints<CR>')
 
 -- ----------------------
 -- plugins config
