@@ -28,8 +28,6 @@ Plug('stevearc/oil.nvim')
 Plug('lukas-reineke/indent-blankline.nvim')
 -- lsp
 Plug('neovim/nvim-lspconfig')
--- daps
-Plug('mfussenegger/nvim-dap')
 
 Plug('norcalli/nvim-colorizer.lua')
 
@@ -69,9 +67,23 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*.gd"},
   command = "set noexpandtab",
 })
--- visible tabs
--- vim.cmd('set list')
 
+
+-- ----------------------
+-- Godot debug config
+-- ----------------------
+
+-- write breakpoint to new line
+vim.api.nvim_create_user_command('GodotBreakpoint', function()
+    vim.cmd('normal! obreakpoint')
+end, {})
+vim.keymap.set('n', '<leader>b', ':GodotBreakpoint<CR>')
+
+-- delete all breakpoints in current file
+vim.api.nvim_create_user_command('GodotRemoveBreakpointsInFile', function()
+    vim.cmd('g/breakpoint/d')
+end, {})
+vim.keymap.set('n', '<leader>B', ':GodotRemoveBreakpointsInFile<CR>')
 
 -- ----------------------
 -- plugins config
@@ -150,46 +162,6 @@ local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
 if not vim.loop.fs_stat(pipepath) then
   vim.fn.serverstart(pipepath)
 end
-
--- ----------------------
--- dap
--- ----------------------
-local dap = require('dap')
--- default remaps from help dap-mappings
-vim.keymap.set('n', '<F12>', function() require('dap').continue() end)
-vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<F9>', function() require('dap').step_out() end)
-vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
-vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
-vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
-
-dap.adapters.godot = {
-  type = 'server',
-  host = '127.0.0.1',
-  port = 6006,
-}
-
-dap.configurations.gdscript = {
-  {
-    type = 'godot',
-    request = 'launch',
-    name = 'Launch scene',
-    program = '${workspaceFolder}',
-  },
-}
-
-dap.configurations.gdresource = {
-  {
-    type = "godot",
-    request = "launch",
-    name = "Launch current scene",
-    scene = "pinned",
-    project = "${workspaceFolder}",
-  }
-}
 
 -- ----------------------
 -- indent-blankline.nvim
