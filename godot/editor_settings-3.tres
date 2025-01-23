@@ -150,3 +150,4 @@ export/android/java_sdk_path = ""
 export/macos/rcodesign = ""
 editors/3d/navigation/show_viewport_navigation_gizmo = false
 network/language_server/poll_limit_usec = 100000
+projects/::home::dulvui::dev::godot::magic-giftcard::game = "/home/dulvui/dev/godot/magic-giftcard/game"

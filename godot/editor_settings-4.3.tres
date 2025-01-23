@@ -81,7 +81,6 @@ editors/3d/navigation/show_viewport_rotation_gizmo = true
 editors/3d/navigation/show_viewport_navigation_gizmo = false
 text_editor/behavior/files/auto_reload_and_parse_scripts_on_save = true
 text_editor/behavior/files/open_dominant_script_on_scene_change = false
-text_editor/external/use_external_editor = true
 text_editor/external/exec_path = "/usr/bin/nvim"
 text_editor/script_list/script_temperature_enabled = true
 text_editor/script_list/script_temperature_history_size = 15
@@ -116,7 +115,7 @@ network/language_server/remote_host = "127.0.0.1"
 network/language_server/remote_port = 6005
 network/language_server/enable_smart_resolve = true
 network/language_server/show_native_symbols_in_editor = false
-network/language_server/use_thread = true
+network/language_server/use_thread = false
 network/language_server/poll_limit_usec = 100000
 editors/3d_gizmos/gizmo_colors/camera = Color(0.8, 0.4, 0.8, 1)
 editors/3d_gizmos/gizmo_colors/stream_player_3d = Color(0.4, 0.8, 1, 1)
@@ -146,6 +145,7 @@ text_editor/theme/highlighting/comment_markers/critical_list = "ALERT,ATTENTION,
 text_editor/theme/highlighting/comment_markers/warning_list = "BUG,DEPRECATED,FIXME,HACK,TASK,TBD,TODO,WARNING"
 text_editor/theme/highlighting/comment_markers/notice_list = "INFO,NOTE,NOTICE,TEST,TESTING"
 text_editor/help/sort_functions_alphabetically = true
+text_editor/external/use_external_editor = true
 metadata/script_setup_templates_dictionary = {
 "Control": "0NodeDefault",
 "MarginContainer": "0NodeDefault"
