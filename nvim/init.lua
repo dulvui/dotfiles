@@ -40,6 +40,7 @@ vim.cmd('colorscheme solarized')
 vim.cmd('set background=light')
 vim.cmd('set nowrap')
 
+-- set path to all files and recursive subdirs, for find command
 vim.cmd('set path+=**')
 
 -- line numbers
@@ -67,7 +68,6 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*.gd"},
   command = "set noexpandtab",
 })
-
 
 -- ----------------------
 -- Godot debug config
@@ -200,3 +200,13 @@ require("ibl").setup { indent = { highlight = highlight } }
 
 -- colorizer
 require("colorizer").setup()
+
+
+-- ----------------------
+-- Godot commands
+-- ----------------------
+
+-- append "# TRANSLATORS: " to current line
+vim.api.nvim_create_user_command('GodotTranslators', function(opts)
+    vim.cmd('normal! A # TRANSLATORS: ')
+end, {})
