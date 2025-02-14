@@ -30,8 +30,9 @@ apt install -y pulsemixer
 
 # bluetooth
 apt install -y bluez
-apt install -y blueman
 apt install -y libspa-0.2-bluetooth
+# gui
+# apt install -y blueman
 
 # thunar
 apt install -y thunar
