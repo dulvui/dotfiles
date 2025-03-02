@@ -7,14 +7,15 @@
 #####################################################
 
 # base
-apt install -y keepassxc 
+apt install -y keepassxc
+apt install -y firefox-esr
 apt install -y chromium
 apt install -y thunderbird
-apt install -y firefox-esr
 apt install -y gimp
 apt install -y krita
 apt install -y libreoffice-gtk3
 apt install -y gedit
+apt install -y inkscape
 
 # audio
 apt install -y pipewire
@@ -66,7 +67,7 @@ apt install -y hstr
 # hstr --show-configuration >> /home/dulvui/.bashrc
 
 # podman
-apt install -y podman podman-compose podman-toolbox
+# apt install -y podman podman-compose podman-toolbox
 
 # sway
 apt install -y sway waybar kanshi swayidle swaylock light wlsunset wofi waybar
