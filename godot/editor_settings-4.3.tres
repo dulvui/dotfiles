@@ -43,6 +43,7 @@ text_editor/theme/highlighting/breakpoint_color = Color(1, 0.27, 0.2, 1)
 text_editor/theme/highlighting/code_folding_color = Color(0, 0, 0, 0.27)
 text_editor/theme/highlighting/search_result_color = Color(0, 0, 0, 0.07)
 text_editor/theme/highlighting/search_result_border_color = Color(0, 0.4, 1, 0.38)
+network/connection/network_mode = 1
 interface/editor/debug/enable_pseudolocalization = false
 editors/3d_gizmos/gizmo_colors/shape = Color(0.5, 0.7, 1, 1)
 asset_library/available_urls = {
@@ -87,7 +88,7 @@ text_editor/script_list/script_temperature_history_size = 15
 text_editor/script_list/group_help_pages = true
 text_editor/script_list/sort_scripts_by = 0
 text_editor/script_list/list_script_names_as = 0
-text_editor/external/exec_flags = "--server /home/dulvui/.cache/nvim/server.pipe --remote-send \"<C-\\><C-N>:e {file}<CR>:call cursor({line}+1,{col})<CR>\""
+text_editor/external/exec_flags = "--server {project}/server.pipe --remote-send \"<C-\\><C-N>:e {file}<CR>:call cursor({line}+1,{col})<CR>\""
 version_control/username = ""
 version_control/ssh_public_key_path = ""
 version_control/ssh_private_key_path = ""
@@ -148,6 +149,7 @@ text_editor/help/sort_functions_alphabetically = true
 text_editor/external/use_external_editor = true
 metadata/script_setup_templates_dictionary = {
 "Control": "0NodeDefault",
-"MarginContainer": "0NodeDefault"
+"MarginContainer": "0NodeDefault",
+"Node": "0NodeDefault"
 }
 metadata/export_template_download_directory = "/home/dulvui/.cache/godot"
