@@ -19,7 +19,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
+-- vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
@@ -93,27 +93,52 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 })
 
 -- ----------------------
--- Godot debug config
+-- Godot
 -- ----------------------
 
--- write breakpoint to new line
-vim.api.nvim_create_user_command('GodotBreakpoint', function()
-    vim.cmd('normal! obreakpoint' )
-    vim.cmd('write' )
-end, {})
-vim.keymap.set('n', '<leader>b', ':GodotBreakpoint<CR>')
+-- check if godot project, once
+local is_godot_project = false
+local godot_project_path = ''
+local cwd = vim.fn.getcwd()
+if vim.uv.fs_stat(cwd .. '/project.godot') then
+    is_godot_project = true
+    godot_project_path = cwd
+end
+-- check in parent directory
+if vim.uv.fs_stat(cwd .. '/../project.godot') then
+    is_godot_project = true
+    godot_project_path = cwd .. '/..'
+end
 
--- delete all breakpoints in current file
-vim.api.nvim_create_user_command('GodotDeleteBreakpoints', function()
-    vim.cmd('g/breakpoint/d')
-end, {})
-vim.keymap.set('n', '<leader>BD', ':GodotDeleteBreakpoints<CR>')
 
--- search all breakpoints in project
-vim.api.nvim_create_user_command('GodotFindBreakpoints', function()
-    vim.cmd(':grep breakpoint | copen')
-end, {})
-vim.keymap.set('n', '<leader>BF', ':GodotFindBreakpoints<CR>')
+-- ----------------------
+-- Godot commands
+-- ----------------------
+if is_godot_project then
+    -- write breakpoint to new line
+    vim.api.nvim_create_user_command('GodotBreakpoint', function()
+        vim.cmd('normal! obreakpoint' )
+        vim.cmd('write' )
+    end, {})
+    vim.keymap.set('n', '<leader>b', ':GodotBreakpoint<CR>')
+
+    -- delete all breakpoints in current file
+    vim.api.nvim_create_user_command('GodotDeleteBreakpoints', function()
+        vim.cmd('g/breakpoint/d')
+    end, {})
+    vim.keymap.set('n', '<leader>BD', ':GodotDeleteBreakpoints<CR>')
+
+    -- search all breakpoints in project
+    vim.api.nvim_create_user_command('GodotFindBreakpoints', function()
+        vim.cmd(':grep breakpoint | copen')
+    end, {})
+    vim.keymap.set('n', '<leader>BF', ':GodotFindBreakpoints<CR>')
+
+    -- append "# TRANSLATORS: " to current line
+    vim.api.nvim_create_user_command('GodotTranslators', function(opts)
+        vim.cmd('normal! A # TRANSLATORS: ')
+    end, {})
+end
 
 -- ----------------------
 -- plugins config
@@ -141,6 +166,14 @@ vim.api.nvim_create_autocmd({"VimEnter"}, {
   command = "if !argc() | NERDTree | wincmd p | endif",
 })
 
+-- for godot projects ignore *.uid files
+if is_godot_project then
+    -- ignore *.uid files introduced in godot 4.4
+    vim.cmd('let NERDTreeIgnore = ["\\.uid$"]')
+    -- ignore server.pipe file
+    vim.cmd('let NERDTreeIgnore = ["server.pipe"]')
+end
+
 -- ----------------------
 -- oil
 -- ----------------------
@@ -150,6 +183,21 @@ require("oil").setup({
     -- skip_confirm_for_simple_edits = true,
     view_options = {
         show_hidden = true,
+        is_always_hidden = function(name, bufnr)
+            -- for godot projects ignore *.uid files
+            if is_godot_project then
+                -- ignore *.uid files introduced in godot 4.4
+                if vim.endswith(name, '.uid') then
+                    return true
+                end
+                -- ignore server.pipe file
+                if name == 'server.pipe' then
+                    return true
+                end
+            else
+                return false
+            end
+        end,
     },
 })
 vim.keymap.set('n', '<leader>o', ':Oil<CR>')
@@ -158,7 +206,7 @@ vim.keymap.set('n', '<leader>o', ':Oil<CR>')
 -- treesitter
 -- -- ----------------------
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = {'gdscript', 'godot_resource', 'gdshader', 'java', 'lua', 'bash', 'xml', 'yaml', 'json', 'go', 'vimdoc'},
+    ensure_installed = {'gdscript', 'godot_resource', 'gdshader', 'lua', 'bash', 'xml', 'yaml', 'json', 'go', 'vimdoc'},
     highlight = {
         enable = true,
     },
@@ -177,21 +225,19 @@ require'nvim-treesitter.configs'.setup {
 -- ----------------------
 local lspconfig = require('lspconfig')
 
-lspconfig.gdscript.setup{}
--- lspconfig.jdtls.setup{}
+-- godot lsp
+if is_godot_project then
+    -- create server.pipe file
+    vim.fn.serverstart(godot_project_path .. '/server.pipe')
+    -- setup lsp
+    lspconfig.gdscript.setup {}
+end
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- create first cache with
--- mkdir .cache/nvim
-local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
-if not vim.loop.fs_stat(pipepath) then
-  vim.fn.serverstart(pipepath)
-end
 
 -- ----------------------
 -- indent-blankline.nvim
@@ -223,13 +269,3 @@ require("ibl").setup { indent = { highlight = highlight } }
 
 -- colorizer
 require("colorizer").setup()
-
-
--- ----------------------
--- Godot commands
--- ----------------------
-
--- append "# TRANSLATORS: " to current line
-vim.api.nvim_create_user_command('GodotTranslators', function(opts)
-    vim.cmd('normal! A # TRANSLATORS: ')
-end, {})
