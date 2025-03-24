@@ -110,6 +110,9 @@ if vim.uv.fs_stat(cwd .. '/../project.godot') then
     godot_project_path = cwd .. '/..'
 end
 
+-- check if server is already running
+local serverlist = vim.fn.serverlist()
+local is_server_running = #serverlist > 0
 
 -- ----------------------
 -- Godot commands
@@ -169,9 +172,8 @@ vim.api.nvim_create_autocmd({"VimEnter"}, {
 -- for godot projects ignore *.uid files
 if is_godot_project then
     -- ignore *.uid files introduced in godot 4.4
-    vim.cmd('let NERDTreeIgnore = ["\\.uid$"]')
     -- ignore server.pipe file
-    vim.cmd('let NERDTreeIgnore = ["server.pipe"]')
+    vim.cmd('let NERDTreeIgnore = ["\\.uid$", "server.pipe"]')
 end
 
 -- ----------------------
@@ -180,7 +182,7 @@ end
 require("oil").setup({
     default_file_explorer = true,
     delete_to_trash = true,
-    -- skip_confirm_for_simple_edits = true,
+    skip_confirm_for_simple_edits = true,
     view_options = {
         show_hidden = true,
         is_always_hidden = function(name, bufnr)
@@ -200,6 +202,7 @@ require("oil").setup({
         end,
     },
 })
+
 vim.keymap.set('n', '<leader>o', ':Oil<CR>')
 
 -- ----------------------
@@ -227,8 +230,10 @@ local lspconfig = require('lspconfig')
 
 -- godot lsp
 if is_godot_project then
-    -- create server.pipe file
-    vim.fn.serverstart(godot_project_path .. '/server.pipe')
+    -- start server, if not already running
+    if not is_server_running then
+        vim.fn.serverstart(godot_project_path .. '/server.pipe')
+    end
     -- setup lsp
     lspconfig.gdscript.setup {}
 end
