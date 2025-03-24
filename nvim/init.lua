@@ -96,23 +96,27 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 -- Godot
 -- ----------------------
 
--- check if godot project, once
+-- paths to check for project.godot file
+local paths_to_check = {'/', '/../'}
 local is_godot_project = false
 local godot_project_path = ''
 local cwd = vim.fn.getcwd()
-if vim.uv.fs_stat(cwd .. '/project.godot') then
-    is_godot_project = true
-    godot_project_path = cwd
-end
--- check in parent directory
-if vim.uv.fs_stat(cwd .. '/../project.godot') then
-    is_godot_project = true
-    godot_project_path = cwd .. '/..'
+
+-- iterate over paths and check
+for key, value in pairs(paths_to_check) do
+    if vim.uv.fs_stat(cwd .. value .. 'project.godot') then
+        is_godot_project = true
+        godot_project_path = cwd .. value
+        break
+    end
 end
 
--- check if server is already running
-local serverlist = vim.fn.serverlist()
-local is_server_running = #serverlist > 0
+-- check if server is already running in godot project path
+local is_server_running = vim.uv.fs_stat(godot_project_path .. '/server.pipe')
+-- start server, if not already running
+if is_godot_project and not is_server_running then
+    vim.fn.serverstart(godot_project_path .. '/server.pipe')
+end
 
 -- ----------------------
 -- Godot commands
@@ -161,7 +165,6 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
   pattern = {"NERD_tree_*"},
   command = "execute 'normal R'",
 })
-
 
 -- open NERDTree when opening a directory, not a single file
 vim.api.nvim_create_autocmd({"VimEnter"}, {
@@ -230,10 +233,6 @@ local lspconfig = require('lspconfig')
 
 -- godot lsp
 if is_godot_project then
-    -- start server, if not already running
-    if not is_server_running then
-        vim.fn.serverstart(godot_project_path .. '/server.pipe')
-    end
     -- setup lsp
     lspconfig.gdscript.setup {}
 end
