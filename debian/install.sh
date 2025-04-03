@@ -16,6 +16,7 @@ apt install -y krita
 apt install -y libreoffice-gtk3
 apt install -y gedit
 apt install -y inkscape
+apt install -y printer-driver-all
 
 # audio
 apt install -y pipewire
