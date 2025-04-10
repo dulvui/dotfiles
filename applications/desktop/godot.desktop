@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Godot4
-Exec=/home/dulvui/dev/godot/versions/Godot_v4.4-stable_linux.x86_64
+Exec=/home/dulvui/dev/godot/versions/Godot_v4.4.1-stable_linux.x86_64
 Terminal=false
 Type=Application
 Categories=Development;
