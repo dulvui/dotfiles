@@ -63,9 +63,14 @@ grt() {
     else
         TAG=$(git tag | tac | head -n 1)
     fi 
+    if [ -n "$2" ]; then
+        REMOTE="$2"
+    else
+        REMOTE="origin"
+    fi 
     git tag -d "$TAG"
-    git push origin :refs/tags/"$TAG"
+    git push "$REMOTE" :refs/tags/"$TAG"
     git tag "$TAG"
-    git push --tags
+    git push "$REMOTE" --tags
 }
 
