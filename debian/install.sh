@@ -55,6 +55,10 @@ apt install -y wl-clipboard
 apt install -y fd-find
 apt install -y tmux
 apt install -y pandoc
+apt install -y tlp
+apt install -y rsync
+# needed for neovim/treesitter
+apt install -y gcc
 
 # dev
 apt install -y openjdk-17-jdk
@@ -93,5 +97,5 @@ apt install -y pipx
 # remove packages
 #####################################################
 
-apt purge nano
+apt purge -y nano
 
