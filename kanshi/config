@@ -7,6 +7,11 @@ profile tv {
     output "Unknown UMC SHARP 0x00000000" mode 1920x1080 position 0,0
 }
 
+profile tv-noi {
+    output eDP-1 enable mode 1920x1080 position 0,0
+    output "Goldstar Company Ltd LG SIGNAGE 0x00000101" mode 1920x1080 position 1920,0
+}
+
 
 profile home-hp-samsung {
     output eDP-1 disable
