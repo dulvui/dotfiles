@@ -16,7 +16,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '  ', lead = '·', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 -- vim.opt.inccommand = 'split'
@@ -40,7 +40,6 @@ vim.call('plug#begin')
 Plug('shaunsingh/solarized.nvim')
 
 Plug('tpope/vim-sensible')
-Plug('tpope/vim-fugitive')
 
 Plug('preservim/nerdtree')
 
@@ -48,8 +47,6 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
 Plug('stevearc/oil.nvim')
 
-Plug('lukas-reineke/indent-blankline.nvim')
--- lsp
 Plug('neovim/nvim-lspconfig')
 
 Plug('norcalli/nvim-colorizer.lua')
@@ -243,33 +240,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- ----------------------
--- indent-blankline.nvim
--- ----------------------
-local highlight = {
-    "RainbowRed",
-    "RainbowYellow",
-    "RainbowBlue",
-    "RainbowOrange",
-    "RainbowGreen",
-    "RainbowViolet",
-    "RainbowCyan",
-}
-
-local hooks = require "ibl.hooks"
--- create the highlight groups in the highlight setup hook, so they are reset
--- every time the colorscheme changes
-hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-    vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-    vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-    vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-    vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-    vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-    vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-end)
-
-require("ibl").setup { indent = { highlight = highlight } }
 
 -- colorizer
 require("colorizer").setup()
+
