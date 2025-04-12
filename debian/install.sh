@@ -8,6 +8,7 @@
 
 # base
 apt install -y keepassxc
+apt install -y libsecret-tools # for keepassxc sercet service plugin
 apt install -y firefox-esr
 apt install -y chromium
 apt install -y thunderbird
