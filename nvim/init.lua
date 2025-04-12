@@ -209,7 +209,7 @@ vim.keymap.set('n', '<leader>o', ':Oil<CR>')
 -- treesitter
 -- -- ----------------------
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = {'gdscript', 'godot_resource', 'gdshader', 'lua', 'bash', 'xml', 'yaml', 'json', 'go', 'vimdoc'},
+    ensure_installed = {'gdscript', 'godot_resource', 'gdshader', 'lua', 'bash', 'yaml', 'json'},
     highlight = {
         enable = true,
         disable = function(lang, buf)
