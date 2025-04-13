@@ -1,0 +1,2 @@
+# for light and systemctl shutdown, suspend, reboot
+%dulvui ALL=(root) NOPASSWD: /usr/bin/light,/usr/bin/systemctl
