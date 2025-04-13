@@ -1,0 +1,4 @@
+dev/
+sync/
+.thunderbird/
+.mozilla/
