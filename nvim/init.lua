@@ -203,7 +203,8 @@ require("oil").setup({
     },
 })
 
-vim.keymap.set('n', '<leader>o', ':Oil<CR>')
+-- like vim-vinegar
+vim.keymap.set('n', '-', ':Oil<CR>')
 
 -- ----------------------
 -- treesitter
