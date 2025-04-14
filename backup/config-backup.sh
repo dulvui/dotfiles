@@ -1,13 +1,13 @@
 #!/bin/bash
 
-cd $config_path
+config_path="/home/dulvui/sync/computer/config"
 
 # used for files or directories, that don't work with soft links
 # like godot's config
 
 # iterate over directories and execute backup.sh
 # .*/ adds hidden directories
-for dir in $(ls -d */ .*/);
+for dir in $(ls -d $config_path/*/ $config_path/.*/);
 do
     if [ -f $dir/backup.sh ];
     then
