@@ -32,7 +32,7 @@ alias config="cd $config_path"
 
 
 #############
-# FUNCTIONS #
+# FUNCTIONS
 #############
 
 
@@ -61,12 +61,12 @@ grt() {
         TAG="$1"
     else
         TAG=$(git tag | tac | head -n 1)
-    fi 
+    fi
     if [ -n "$2" ]; then
         REMOTE="$2"
     else
         REMOTE="origin"
-    fi 
+    fi
     git tag -d "$TAG"
     git push "$REMOTE" :refs/tags/"$TAG"
     git tag "$TAG"
