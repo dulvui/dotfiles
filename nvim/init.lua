@@ -4,7 +4,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-
 -- ----------------------
 -- vim commands
 -- ----------------------
@@ -41,27 +40,29 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*.gd"},
   command = "set noexpandtab",
 })
---
+
 -- ----------------------
 -- Left padding if only one window is open
 -- ----------------------
 
--- set default to 9
-vim.wo.signcolumn = "yes:9"
-vim.wo.foldcolumn = "9"
+-- set default
+vim.wo.signcolumn = 'yes:9'
+vim.wo.foldcolumn = '9'
+
 -- check window list count and adapt padding
 vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "VimResized" }, {
   callback = function()
       local list = vim.api.nvim_list_wins()
       if # list == 1 then
-        vim.wo.signcolumn = "yes:9"
-        vim.wo.foldcolumn = "9"
+        vim.wo.signcolumn = 'yes:9'
+        vim.wo.foldcolumn = '9'
       else
-        vim.wo.signcolumn = "yes:1"
-        vim.wo.foldcolumn = "0"
+        vim.wo.signcolumn = 'yes:1'
+        vim.wo.foldcolumn = '0'
       end
   end,
 })
+
 
 -- ----------------------
 --  from https://github.com/nvim-lua/kickstart.nvim
@@ -179,7 +180,8 @@ end
 -- ----------------------
 -- oil
 -- ----------------------
-require('oil').setup({
+local oil = require('oil')
+oil.setup({
     default_file_explorer = true,
     delete_to_trash = true,
     skip_confirm_for_simple_edits = true,
@@ -200,11 +202,6 @@ require('oil').setup({
                 return false
             end
         end,
-    },
-    -- Window-local options to use for oil buffers
-    win_options = {
-        signcolumn = "yes:9",
-        foldcolumn = "9",
     },
 })
 
