@@ -31,14 +31,14 @@ vim.cmd('set shiftwidth=4')
 -- spaces instead of tabs
 vim.cmd('set expandtab')
 -- except for godot
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-  pattern = {"*.gd"},
-  command = "set noexpandtab",
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  pattern = {'*.gd'},
+  command = 'set noexpandtab',
 })
 -- except for godot
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-  pattern = {"*.gd"},
-  command = "set noexpandtab",
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  pattern = {'*.gd'},
+  command = 'set noexpandtab',
 })
 
 -- ----------------------
@@ -50,7 +50,7 @@ vim.wo.signcolumn = 'yes:9'
 vim.wo.foldcolumn = '9'
 
 -- check window list count and adapt padding
-vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "VimResized" }, {
+vim.api.nvim_create_autocmd({'BufEnter', 'WinEnter', 'WinLeave', 'VimResized' }, {
   callback = function()
       local list = vim.api.nvim_list_wins()
       if # list == 1 then
@@ -167,7 +167,7 @@ if is_godot_project then
     end, {})
     vim.keymap.set('n', '<leader>BF', ':GodotFindBreakpoints<CR>')
 
-    -- append "# TRANSLATORS: " to current line
+    -- append '# TRANSLATORS: ' to current line
     vim.api.nvim_create_user_command('GodotTranslators', function(opts)
         vim.cmd('normal! A # TRANSLATORS: ')
     end, {})
