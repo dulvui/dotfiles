@@ -4,6 +4,65 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+
+-- ----------------------
+-- vim commands
+-- ----------------------
+
+-- set path to all files and recursive subdirs, for find command
+vim.cmd('set path+=**')
+-- ignore godot .uid files in wild menus
+vim.cmd('set wildignore+=**.uid')
+
+-- line numbers
+vim.cmd('set number')
+vim.cmd('set relativenumber')
+
+-- cursorline
+vim.cmd('set cursorline')
+
+-- spell check
+-- vim.cmd('set spell')
+vim.cmd('set spelllang=en_us,cjk')
+vim.cmd('set spellsuggest=best,9')
+
+-- smaller tabs size
+vim.cmd('set tabstop=4')
+vim.cmd('set shiftwidth=4')
+-- spaces instead of tabs
+vim.cmd('set expandtab')
+-- except for godot
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.gd"},
+  command = "set noexpandtab",
+})
+-- except for godot
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.gd"},
+  command = "set noexpandtab",
+})
+--
+-- ----------------------
+-- Left padding if only one window is open
+-- ----------------------
+
+-- set default to 9
+vim.wo.signcolumn = "yes:9"
+vim.wo.foldcolumn = "9"
+-- check window list count and adapt padding
+vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "VimResized" }, {
+  callback = function()
+      local list = vim.api.nvim_list_wins()
+      if # list == 1 then
+        vim.wo.signcolumn = "yes:9"
+        vim.wo.foldcolumn = "9"
+      else
+        vim.wo.signcolumn = "yes:1"
+        vim.wo.foldcolumn = "0"
+      end
+  end,
+})
+
 -- ----------------------
 --  from https://github.com/nvim-lua/kickstart.nvim
 -- ----------------------
@@ -16,7 +75,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '  ', lead = '·', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 -- vim.opt.inccommand = 'split'
@@ -52,40 +111,11 @@ Plug('norcalli/nvim-colorizer.lua')
 vim.call('plug#end')
 
 -- ----------------------
--- vim commands
+-- Solarized
 -- ----------------------
 vim.cmd('colorscheme solarized')
 vim.cmd('set background=light')
 vim.cmd('set nowrap')
-
--- set path to all files and recursive subdirs, for find command
-vim.cmd('set path+=**')
-
--- line numbers
-vim.cmd('set number')
-vim.cmd('set relativenumber')
-
--- always show warning/error line
-vim.cmd('set signcolumn=yes:1')
-
--- cursorline
-vim.cmd('set cursorline')
-
--- spell check
--- vim.cmd('set spell')
-vim.cmd('set spelllang=en_us,cjk')
-vim.cmd('set spellsuggest=best,9')
-
--- smaller tabs size
-vim.cmd('set tabstop=4')
-vim.cmd('set shiftwidth=4')
--- spaces instead of tabs
-vim.cmd('set expandtab')
--- except for godot
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-  pattern = {"*.gd"},
-  command = "set noexpandtab",
-})
 
 -- ----------------------
 -- Godot
@@ -149,7 +179,7 @@ end
 -- ----------------------
 -- oil
 -- ----------------------
-require("oil").setup({
+require('oil').setup({
     default_file_explorer = true,
     delete_to_trash = true,
     skip_confirm_for_simple_edits = true,
@@ -171,6 +201,11 @@ require("oil").setup({
             end
         end,
     },
+    -- Window-local options to use for oil buffers
+    win_options = {
+        signcolumn = "yes:9",
+        foldcolumn = "9",
+    },
 })
 
 -- like vim-vinegar
@@ -179,7 +214,7 @@ vim.keymap.set('n', '-', ':Oil<CR>')
 -- ----------------------
 -- treesitter
 -- -- ----------------------
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
     ensure_installed = {'gdscript', 'godot_resource', 'gdshader', 'lua', 'bash', 'yaml', 'json'},
     highlight = {
         enable = true,
@@ -213,5 +248,5 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 
 -- colorizer
-require("colorizer").setup()
+require('colorizer').setup()
 
