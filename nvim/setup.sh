@@ -12,5 +12,5 @@ else
 fi
 
 mkdir ~/.config/nvim
-ln -s $config_path/nvim/init.lua ~/.config/nvim/init.lua  
-ls -l $config_path/nvim/init.lua ~/.config/nvim/init.lua  
+ln -s $config_path/nvim/init.lua ~/.config/nvim/init.lua
+ls -l $config_path/nvim/init.lua ~/.config/nvim/init.lua
