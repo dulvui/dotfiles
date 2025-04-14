@@ -13,13 +13,6 @@ vim.cmd('set path+=**')
 -- ignore godot .uid files in wild menus
 vim.cmd('set wildignore+=**.uid')
 
--- line numbers
-vim.cmd('set number')
-vim.cmd('set relativenumber')
-
--- cursorline
-vim.cmd('set cursorline')
-
 -- spell check
 -- vim.cmd('set spell')
 vim.cmd('set spelllang=en_us,cjk')
@@ -44,21 +37,25 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
 -- ----------------------
 -- Left padding if only one window is open
 -- ----------------------
+vim.cmd('set number')
+vim.cmd('set relativenumber')
+vim.cmd('set numberwidth=4')
+
+local status_line = "                                  %C%s %r "
 
 -- set default
-vim.wo.signcolumn = 'yes:9'
-vim.wo.foldcolumn = '9'
+vim.wo.signcolumn = 'yes:1'
+vim.wo.foldcolumn = '1'
+vim.o.statuscolumn = status_line
 
 -- check window list count and adapt padding
 vim.api.nvim_create_autocmd({'BufEnter', 'WinEnter', 'WinLeave', 'VimResized' }, {
   callback = function()
       local list = vim.api.nvim_list_wins()
       if # list == 1 then
-        vim.wo.signcolumn = 'yes:9'
-        vim.wo.foldcolumn = '9'
+        vim.o.statuscolumn = status_line
       else
-        vim.wo.signcolumn = 'yes:1'
-        vim.wo.foldcolumn = '0'
+        vim.o.statuscolumn = "%C%s %l "
       end
   end,
 })
