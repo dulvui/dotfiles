@@ -41,8 +41,6 @@ Plug('shaunsingh/solarized.nvim')
 
 Plug('tpope/vim-sensible')
 
-Plug('preservim/nerdtree')
-
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
 Plug('stevearc/oil.nvim')
@@ -147,34 +145,6 @@ end
 -- ----------------------
 -- plugins config
 -- ----------------------
-
--- ----------------------
--- NERDTree
--- ----------------------
-vim.cmd('let NERDTreeShowHidden=1')
-vim.keymap.set('n', '<leader>n', ':NERDTreeFocus<CR>')
-vim.keymap.set('n', '<C-n>', ':NERDTree<CR>')
-vim.keymap.set('n', '<C-t>', ':NERDTreeToggle<CR>')
-vim.keymap.set('n', '<C-f>', ':NERDTreeFind<CR>')
-
--- except for godot
-vim.api.nvim_create_autocmd({"BufEnter"}, {
-  pattern = {"NERD_tree_*"},
-  command = "execute 'normal R'",
-})
-
--- open NERDTree when opening a directory, not a single file
-vim.api.nvim_create_autocmd({"VimEnter"}, {
-  pattern = {"*"},
-  command = "if !argc() | NERDTree | wincmd p | endif",
-})
-
--- for godot projects ignore *.uid files
-if is_godot_project then
-    -- ignore *.uid files introduced in godot 4.4
-    -- ignore server.pipe file
-    vim.cmd('let NERDTreeIgnore = ["\\.uid$", "server.pipe"]')
-end
 
 -- ----------------------
 -- oil
