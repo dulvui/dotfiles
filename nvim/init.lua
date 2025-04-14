@@ -48,11 +48,14 @@ vim.wo.signcolumn = 'yes:1'
 vim.wo.foldcolumn = '1'
 vim.o.statuscolumn = statuscolumn
 
+
 -- check window list count and adapt padding
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter', 'WinLeave', 'VimResized' }, {
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter', 'WinLeave', 'WinResized', 'VimResized' }, {
   callback = function()
       local list = vim.api.nvim_list_wins()
-      if # list == 1 then
+      -- full size is 191
+      local winwidth = vim.api.nvim_win_get_width(0)
+      if winwidth > 120 and # list == 1 then
         vim.o.statuscolumn = statuscolumn
       else
         vim.o.statuscolumn = "%C%s %l "
