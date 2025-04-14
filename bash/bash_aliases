@@ -1,6 +1,5 @@
 # basic
 alias ll="ls -la"
-alias vim="nvim"
 alias v="nvim"
 alias t="tmux"
 
