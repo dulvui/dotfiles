@@ -1,6 +1,7 @@
 #!/bin/bash
 
-config_path="/home/dulvui/sync/computer/config"
+home_path="/home/dulvui"
+config_path="$home_path/sync/computer/config"
 
 # TODO
 # check if disks are mounted
@@ -18,7 +19,7 @@ function backup() {
 
     while read dir; do
         echo "backing up $2$dir..."
-        rsync -az --delete  --exclude ".stversions" "$dir" $2$dir
+        rsync -az --delete --exclude ".stversions" "$home_path/$dir" $2$dir
         echo "backing up $2$dir done."
     done <"$config_path/backup/$1"
 }
