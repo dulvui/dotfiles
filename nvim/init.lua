@@ -8,6 +8,7 @@ vim.g.maplocalleader = ' '
 -- vim commands
 -- ----------------------
 
+vim.cmd('set nowrap')
 -- set path to all files and recursive subdirs, for find command
 vim.cmd('set path+=**')
 -- ignore godot .uid files in wild menus
@@ -55,7 +56,7 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter
       local list = vim.api.nvim_list_wins()
       -- full size is 191
       local winwidth = vim.api.nvim_win_get_width(0)
-      if winwidth > 120 and # list == 1 then
+      if winwidth > 120 then
         vim.o.statuscolumn = statuscolumn
       else
         vim.o.statuscolumn = "%C%s %l "
@@ -72,17 +73,13 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+
 -- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
 
--- Preview substitutions live, as you type!
--- vim.opt.inccommand = 'split'
-
--- Show which line your cursor is on
-vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
@@ -116,7 +113,6 @@ vim.call('plug#end')
 -- ----------------------
 vim.cmd('colorscheme solarized')
 vim.cmd('set background=light')
-vim.cmd('set nowrap')
 
 -- ----------------------
 -- Godot
