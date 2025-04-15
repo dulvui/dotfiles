@@ -43,23 +43,23 @@ vim.cmd('set relativenumber')
 vim.cmd('set numberwidth=4')
 
 local statuscolumn = "                                  %C%s %r "
+local statuscolumn_short = "%C%s %r "
 
 -- set default
-vim.wo.signcolumn = 'yes:1'
+vim.wo.signcolumn = 'yes:2'
 vim.wo.foldcolumn = '1'
 vim.o.statuscolumn = statuscolumn
-
 
 -- check window list count and adapt padding
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter', 'WinLeave', 'WinResized', 'VimResized' }, {
   callback = function()
-      local list = vim.api.nvim_list_wins()
+      -- local list = vim.api.nvim_list_wins()
       -- full size is 191
       local winwidth = vim.api.nvim_win_get_width(0)
       if winwidth > 120 then
         vim.o.statuscolumn = statuscolumn
       else
-        vim.o.statuscolumn = "%C%s %l "
+        vim.o.statuscolumn = statuscolumn_short
       end
   end,
 })
