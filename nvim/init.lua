@@ -43,8 +43,8 @@ vim.cmd('set number')
 vim.cmd('set relativenumber')
 vim.cmd('set numberwidth=4')
 
-local statuscolumn = "                                  %C%s %r "
-local statuscolumn_short = "%C%s %r "
+local statuscolumn = "                                  %s %r "
+local statuscolumn_short = "%s %r "
 
 -- set default
 vim.wo.signcolumn = 'yes:2'
