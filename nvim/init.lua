@@ -95,7 +95,7 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
-Plug('Tsuzat/NeoSolarized.nvim')
+Plug('dulvui/NeoSolarized.nvim')
 
 Plug('tpope/vim-sensible')
 
@@ -130,6 +130,7 @@ require('NeoSolarized').setup {
 }
 
 vim.cmd('colorscheme NeoSolarized')
+vim.cmd('set background=light')
 
 -- ----------------------
 -- Godot
