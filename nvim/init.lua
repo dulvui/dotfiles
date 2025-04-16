@@ -1,6 +1,7 @@
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+--
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -94,7 +95,7 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
-Plug('shaunsingh/solarized.nvim')
+Plug('Tsuzat/NeoSolarized.nvim')
 
 Plug('tpope/vim-sensible')
 
@@ -111,8 +112,24 @@ vim.call('plug#end')
 -- ----------------------
 -- Solarized
 -- ----------------------
-vim.cmd('colorscheme solarized')
-vim.cmd('set background=light')
+
+require('NeoSolarized').setup {
+  style = "light",
+  transparent = true,
+  terminal_colors = false,
+  enable_italics = false,
+  styles = {
+    comments = { italic = false },
+    keywords = { italic = false },
+    functions = { bold = false },
+    variables = {},
+    string = { italic = false },
+    underline = true,
+    undercurl = true,
+  },
+}
+
+vim.cmd('colorscheme NeoSolarized')
 
 -- ----------------------
 -- Godot
