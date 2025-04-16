@@ -54,7 +54,8 @@ vim.o.statuscolumn = statuscolumn
 -- check window list count and adapt padding
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter', 'WinLeave', 'WinResized', 'VimResized' }, {
   callback = function()
-      -- local list = vim.api.nvim_list_wins()
+      -- get width with followinc command while neovim in fullscreen
+      -- :lua print(vim.api.nvim_win_get_width(0))
       -- full size is 191
       local winwidth = vim.api.nvim_win_get_width(0)
       if winwidth > 120 then
