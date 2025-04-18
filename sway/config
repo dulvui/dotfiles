@@ -120,9 +120,9 @@ bindsym $mod+b splith
 bindsym $mod+v splitv
 
 # Switch the current container between different layout styles
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s layout toggle split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
@@ -175,8 +175,7 @@ bindsym $mod+r mode "resize"
 #
 # Custom config import
 #
+include /etc/sway/config.d/*
+include ~/.config/sway/config.d/*
 include ~/sync/computer/config/sway/config.d/*.config
 
-include ~/.config/sway/config.d/*
-
-include /etc/sway/config.d/*
