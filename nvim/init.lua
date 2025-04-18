@@ -128,6 +128,10 @@ require('NeoSolarized').setup {
     underline = true,
     undercurl = true,
   },
+  -- Add specific hightlight groups
+  on_highlights = function(highlights, colors)
+    highlights.SpellBad.fg = colors.green
+  end,
 }
 
 vim.cmd('colorscheme NeoSolarized')
