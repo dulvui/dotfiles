@@ -30,11 +30,6 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   pattern = {'*.gd'},
   command = 'set noexpandtab',
 })
--- except for godot
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {'*.gd'},
-  command = 'set noexpandtab',
-})
 
 -- ----------------------
 -- Left padding if only one window is open
