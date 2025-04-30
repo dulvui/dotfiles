@@ -1,13 +1,21 @@
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
---
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- ----------------------
 -- vim commands
 -- ----------------------
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+vim.opt.list = true
+vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
 
 vim.cmd('set nowrap')
 -- set path to all files and recursive subdirs, for find command
@@ -31,12 +39,10 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   command = 'set noexpandtab',
 })
 
--- ----------------------
 -- Left padding if only one window is open
--- ----------------------
 vim.cmd('set number')
 vim.cmd('set relativenumber')
-vim.cmd('set numberwidth=4')
+vim.cmd('set numberwidth=3')
 
 local statuscolumn = "                                  %s %r "
 local statuscolumn_short = "%s %r "
@@ -61,24 +67,19 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter
   end,
 })
 
-
 -- ----------------------
---  from https://github.com/nvim-lua/kickstart.nvim
+-- custom keymaps
 -- ----------------------
 
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+-- buffer navigation
+vim.keymap.set('n', '<leader>bn', ':bnext<CR>')
+vim.keymap.set('n', '<leader>bp', ':bprevious<CR>')
+vim.keymap.set('n', '<leader>bd', ':bdelete<CR>')
+vim.keymap.set('n', '<leader>bl', ':buffers<CR>')
 
--- Show which line your cursor is on
-vim.opt.cursorline = true
-
--- Sets how neovim will display certain whitespace characters in the editor.
-vim.opt.list = true
-vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+-- search
+vim.keymap.set('n', '<leader>f', ':fin ')
+vim.keymap.set('n', '<leader>g', ':copen | grep ')
 
 
 -- ----------------------
