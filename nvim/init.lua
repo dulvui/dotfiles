@@ -12,7 +12,7 @@ vim.opt.cursorline = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 vim.opt.list = true
-vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '· ', trail = '·', nbsp = '␣', extends = '⯈', precedes = '⯇' }
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
@@ -72,10 +72,10 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter
 -- ----------------------
 
 -- buffer navigation
-vim.keymap.set('n', '<leader>bn', ':bnext<CR>')
-vim.keymap.set('n', '<leader>bp', ':bprevious<CR>')
-vim.keymap.set('n', '<leader>bd', ':bdelete<CR>')
-vim.keymap.set('n', '<leader>bl', ':buffers<CR>')
+vim.keymap.set('n', '<leader>n', ':bnext<CR>')
+vim.keymap.set('n', '<leader>t', ':bprevious<CR>')
+vim.keymap.set('n', '<leader>d', ':bdelete<CR>')
+vim.keymap.set('n', '<leader>l', ':buffers<CR>')
 
 -- search
 vim.keymap.set('n', '<leader>f', ':fin ')
