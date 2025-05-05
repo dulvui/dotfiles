@@ -40,12 +40,12 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
 })
 
 -- Left padding if only one window is open
-vim.cmd('set number')
-vim.cmd('set relativenumber')
+vim.cmd('set number relativenumber')
 vim.cmd('set numberwidth=3')
 
-local statuscolumn = "                                  %s %r "
-local statuscolumn_short = "%s %r "
+-- show number on active line and relative on others
+local statuscolumn = "%s %=%{v:relnum?v:relnum:v:lnum} "
+local statuscolumn_wide = "                                  " .. statuscolumn
 
 -- set default
 vim.wo.signcolumn = 'yes:2'
@@ -60,9 +60,9 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter
       -- full size is 191
       local winwidth = vim.api.nvim_win_get_width(0)
       if winwidth > 120 then
-        vim.o.statuscolumn = statuscolumn
+        vim.o.statuscolumn = statuscolumn_wide
       else
-        vim.o.statuscolumn = statuscolumn_short
+        vim.o.statuscolumn = statuscolumn
       end
   end,
 })
@@ -76,6 +76,8 @@ vim.keymap.set('n', '<leader>n', ':bnext<CR>')
 vim.keymap.set('n', '<leader>t', ':bprevious<CR>')
 vim.keymap.set('n', '<leader>d', ':bdelete<CR>')
 vim.keymap.set('n', '<leader>l', ':buffers<CR>')
+-- close all buffers and reopen last edited buffer
+vim.keymap.set('n', 'cab', ':%bd|e#|bd#<CR>')
 
 -- search
 vim.keymap.set('n', '<leader>f', ':fin ')
@@ -246,11 +248,14 @@ require('nvim-treesitter.configs').setup {
 -- ----------------------
 local lspconfig = require('lspconfig')
 
--- godot lsp
+-- godot
 if is_godot_project then
     -- setup lsp
     lspconfig.gdscript.setup {}
 end
+
+-- golang
+lspconfig.gopls.setup({})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
