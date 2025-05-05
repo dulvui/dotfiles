@@ -39,9 +39,6 @@ _script_setup_templates_dictionary = {
 "Node": "0NodeDefault"
 }
 _script_setup_use_script_templates = true
-asset_library/available_urls = {
-"godotengine.org (Official)": "https://godotengine.org/asset-library/api"
-}
 shortcuts = [{
 "name": "spatial_editor/viewport_zoom_modifier_1",
 "shortcuts": [SubResource("InputEventKey_tcflg")]
