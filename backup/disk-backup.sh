@@ -2,6 +2,7 @@
 
 home_path="/home/dulvui"
 config_path="$home_path/sync/computer/config"
+date=$(date +'%Y-%m-%d %H:%M:%S')
 
 # TODO
 # check if disks are mounted
@@ -30,7 +31,7 @@ function backup() {
     done <"$config_path/backup/$1"
 }
 
-echo "start backup at $(date)" > $home_path/logs/disk-backup.log
+echo "start backup at $date" > $home_path/logs/disk-backup.log
 
 # echo "backup to sd lexar..." >> $home_path/logs/disk-backup.log
 # backup "dirs-full.txt" "/media/dulvui/18d8f048-1239-46ca-8548-18b709fc2c0d/"
@@ -44,5 +45,5 @@ echo "backup to ssd..." >> $home_path/logs/disk-backup.log
 backup "dirs-full.txt" "/media/dulvui/24ecc7ab-d81d-47b1-bc9d-e207d72cbffc/"
 echo "backup to ssd done." >> $home_path/logs/disk-backup.log
 
-echo "end backup at $(date)" >> $home_path/logs/disk-backup.log
+echo "end backup at $date" >> $home_path/logs/disk-backup.log
 

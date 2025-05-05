@@ -2,10 +2,11 @@
 
 home_path="/home/dulvui"
 config_path="$home_path/sync/computer/config"
+date=$(date +'%Y-%m-%d %H:%M:%S')
 
 # used for files or directories, that don't work with soft links
 # like godot's config
-echo "start backup at $(date)" > $home_path/logs/config-backup.log
+echo "start backup at $date" > $home_path/logs/config-backup.log
 
 # iterate over directories and execute backup.sh
 # .*/ adds hidden directories
@@ -19,4 +20,4 @@ do
     fi;
 done
 
-echo "end backup at $(date)" >> $home_path/logs/config-backup.log
+echo "end backup at $date" >> $home_path/logs/config-backup.log
