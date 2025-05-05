@@ -1,6 +1,11 @@
+# PATH
+# go
+export PATH="$PATH:/usr/local/go/bin"
+# pipx
+export PATH="$PATH:/home/dulvui/.local/bin"
 
 # SSH agent
-SSH_ENV="$HOME/.ssh/agent-environment"
+export SSH_ENV="$HOME/.ssh/agent-environment"
 
 function start_agent {
     echo "Initialising new SSH agent..."
@@ -32,5 +37,3 @@ if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
     exec sway
 fi
 
-# golang PATH
-export PATH=$PATH:/usr/local/go/bin
