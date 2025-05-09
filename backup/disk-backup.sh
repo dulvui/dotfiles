@@ -26,7 +26,7 @@ function backup() {
 
     while read dir; do
         echo "backing up $2$dir..." >> $home_path/logs/disk-backup.log
-        rsync -az --delete --exclude ".stversions" "$home_path/$dir" $2$dir
+        rsync -a --delete --exclude-from="$config_path/backup/exclude.txt" "$home_path/$dir" $2$dir
         echo "backing up $2$dir done." >> $home_path/logs/disk-backup.log
     done <"$config_path/backup/$1"
 }
@@ -41,9 +41,17 @@ echo "backup to sd samsung..." >> $home_path/logs/disk-backup.log
 backup "dirs-tiny.txt" "/media/dulvui/63add787-ae09-465c-9d7e-be3e16b346d1/"
 echo "backup to sd samsung done." >> $home_path/logs/disk-backup.log
 
-echo "backup to ssd..." >> $home_path/logs/disk-backup.log
-backup "dirs-full.txt" "/media/dulvui/24ecc7ab-d81d-47b1-bc9d-e207d72cbffc/"
-echo "backup to ssd done." >> $home_path/logs/disk-backup.log
+# echo "backup to ssd..." >> $home_path/logs/disk-backup.log
+# backup "dirs-full.txt" "/media/dulvui/24ecc7ab-d81d-47b1-bc9d-e207d72cbffc/"
+# echo "backup to ssd done." >> $home_path/logs/disk-backup.log
+
+# echo "backup to rpi..." >> $home_path/logs/disk-backup.log
+# backup "dirs-full.txt" "jump-rpi:/mnt/disk/"
+# echo "backup to rpi done." >> $home_path/logs/disk-backup.log
+
+echo "backup to rpi-zero..." >> $home_path/logs/disk-backup.log
+backup "dirs-full.txt" "rpi-zero:/mnt/disk/"
+echo "backup to rpi-zero done." >> $home_path/logs/disk-backup.log
 
 echo "end backup at $date" >> $home_path/logs/disk-backup.log
 
