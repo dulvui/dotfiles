@@ -17,6 +17,7 @@ vim.opt.listchars = { tab = '· ', trail = '·', nbsp = '␣', extends = '⯈', 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+vim.cmd('set colorcolumn=100')
 vim.cmd('set nowrap')
 -- set path to all files and recursive subdirs, for find command
 vim.cmd('set path+=**')
@@ -24,7 +25,7 @@ vim.cmd('set path+=**')
 vim.cmd('set wildignore+=**.uid')
 
 -- spell check
--- vim.cmd('set spell')
+vim.cmd('set spell')
 vim.cmd('set spelllang=en_us,cjk')
 vim.cmd('set spellsuggest=best,9')
 
@@ -187,6 +188,11 @@ if is_godot_project then
     -- append '# TRANSLATORS: ' to current line
     vim.api.nvim_create_user_command('GodotTranslators', function(opts)
         vim.cmd('normal! A # TRANSLATORS: ')
+    end, {})
+    --
+    -- append '# NO_TRANSLATE' to current line
+    vim.api.nvim_create_user_command('GodotNoTranslate', function(opts)
+        vim.cmd('normal! A # NO_TRANSLATE')
     end, {})
 end
 
