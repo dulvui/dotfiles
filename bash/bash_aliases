@@ -19,10 +19,6 @@ alias gc="git commit"
 alias gl="git log"
 alias ga="git add"
 
-# godot
-alias godot="(cd ~/dev/godot/versions; ./$(ls ~/dev/godot/versions | grep v4 | tail -1) &> /dev/null &)"
-alias godot3="(cd ~/dev/godot/versions; ./$(ls ~/dev/godot/versions | grep v3 | tail -1) &> /dev/null &)"
-
 # notes
 alias notes="cd ~/sync/shared/notes"
 alias notes-futsal="cd ~/sync/shared/notes/dev/games/futsal"
